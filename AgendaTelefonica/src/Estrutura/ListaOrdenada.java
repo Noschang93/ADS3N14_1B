@@ -58,9 +58,6 @@ package Estrutura;
 			lista.append(new Nodo<String>("Mauro"));
 			lista.insert(new Nodo<String>("Carlos"));
 			
-			//lista.insert(new Nodo<String>("Rafael"));
-			//lista.insert(new Nodo<String>("Raphael"));
-
 			lista.print();
 			System.out.println("--------");
 			

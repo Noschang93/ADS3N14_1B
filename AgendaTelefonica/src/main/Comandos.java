@@ -19,42 +19,44 @@ public class Comandos {
 
 
     public void showMenu(){
-	System.out.println("Comandos: Adicionar, Mostrar Lista (mostra a lista inteira), Pesquisar Letra, Navegar (avancar , voltar) e Sair.\n");
+	System.out.println("\n Menu: \n 1- Adicionar Contato \n 2 - Mostrar Lista\n 3 - Pesquisar Letra\n 4 - Navegar\n 5- Sair\n");
 
 	
     }
     
-    public void readAction(String cmd) throws IOException{
-	cmd = cmd.toLowerCase();
-	if(cmd.equals("adicionar")){
+    public void readAction(Integer cmd) throws IOException{
+	if(cmd.equals(1)){
 	    add();
 	}
 	
-	if(cmd.equals("mostrar lista")){
+	if(cmd.equals(2)){
 	    showList();
 	}
-	if(cmd.equals("pesquisar letra")){
-	    String letraPesquisa;
-	    System.out.println("Entre com o caractere:");
-	    letraPesquisa= sc.nextLine();
-	  char letra = letraPesquisa.charAt(0);
-	    findByChar(letra);
+	
+	if(cmd.equals(3))
+	{
+		System.out.println("Entre com o caractere para pesquisar o contato:");
+	    String Pesquisa= sc.next();
+	    char teste = Pesquisa.charAt(0);
+	    PesquisaChar(teste);
 	}
 	
-	if(cmd.equals("navegar")){
+	if(cmd.equals(4)){
 	    surfIntoList();
 	}
 	
-	
-	if(cmd.equals("sair")){
-	    System.out.println("Programa Encerrado...");
+	if(cmd.equals(5)){
+	    System.out.println("você saiu do sistema");
 	    System.exit(0);
 	}
+	
+	
+	
      }
     
     public void add() throws IOException{
 	
-		 Reader fileReader = new FileReader("registros.txt");
+		 Reader fileReader = new FileReader("Lista_telefonica.txt");
 		
 		 br = new BufferedReader(fileReader);
 		
@@ -64,21 +66,18 @@ public class Comandos {
 		
 		 sc = new Scanner(System.in);
 		
-		 Writer fileWriter = new FileWriter("registros.txt", true);
+		 Writer fileWriter = new FileWriter("Lista_telefonica.txt", true);
 	
 		
-		 System.out.println("Digite o nome: ");
+		 System.out.println("Nome: ");
 
 		 nome = sc.nextLine()+";".toLowerCase();
 		
 		
-	    //inserir ddd!!
-	System.out.println("Digite o telefone: ");
+	    
+	System.out.println("Telefone: ");
 	telefone = sc.nextLine();
 	
-	/*Inserindo os valores no arquivo .txt
-	 * 
-	 * **/
 	boolean insertion = false;
 
 	while (insertion!=true) {
@@ -98,7 +97,7 @@ public class Comandos {
 	
  	 ListaOrdenada<String> lista = new ListaOrdenada<String>();
 	
-	 Reader fileReader = new FileReader("registros.txt");
+	 Reader fileReader = new FileReader("Lista_telefonica.txt");
 	 br = new BufferedReader(fileReader);
 	
       
@@ -109,21 +108,20 @@ public class Comandos {
 		
 	     String[] breakLine = line.split(";");
 	     
-	     //	System.out.println(line);
+	     System.out.println(line);
 		
 			 String nomePessoa = breakLine[0];//nome
 			 String telefonePessoa = breakLine[1];//telefone
 			 
-			 nomePessoa.toLowerCase();
-	 			 
 			 ps.setNome(nomePessoa.toLowerCase());
 			 ps.setTelefone(telefonePessoa);
 			 
-			 lista.insert(new Nodo<String>(ps.getNome().toLowerCase()+" "+ps.getTelefone()));
+			 lista.insert(new Nodo<String>("Contato: "+ps.getNome().toUpperCase()+" "+"| Telefone: "+ps.getTelefone()));
 		
+			 
 			
 	 }
-		System.out.println("----------------");
+		System.out.println("\n ++++++++++++++++++++++++++++Forma ordenada:++++++++++++++++++++++++++++ \n");
 		lista.print();
       
     }
@@ -131,13 +129,13 @@ public class Comandos {
   
 
   
-  	public void findByChar(char c) throws IOException{
+  	public void PesquisaChar(char c) throws IOException{
   	  
   	  Pessoa ps = new Pessoa();
   	
   	 ListaOrdenada<String> lista = new ListaOrdenada<String>();
  	
- 	 Reader fileReader = new FileReader("registros.txt");
+ 	 Reader fileReader = new FileReader("Lista_telefonica.txt");
  	 br = new BufferedReader(fileReader);
  	
        
@@ -151,13 +149,14 @@ public class Comandos {
  
  			 String nomePessoa = breakLine[0];//nome
  			 String telefonePessoa = breakLine[1];//telefone
- 			nomePessoa.toLowerCase();
+ 			 nomePessoa.toLowerCase();
  			
  					 
  			 ps.setNome(nomePessoa.toLowerCase());
  			 ps.setTelefone(telefonePessoa);
  			 
- 			 lista.insert(new Nodo<String>(ps.getNome().toLowerCase()+" "+ps.getTelefone()));	
+ 			lista.insert(new Nodo<String>(ps.getNome().toLowerCase()+" "+ps.getTelefone()));
+ 			
  			
  	 }
  		System.out.println("----------------");
@@ -170,7 +169,7 @@ public class Comandos {
   		
   	 	 ListaOrdenada<String> lista = new ListaOrdenada<String>();
   		
-  		 Reader fileReader = new FileReader("registros.txt");
+  		 Reader fileReader = new FileReader("Lista_telefonica.txt");
   		 br = new BufferedReader(fileReader);
   		
   	      
@@ -190,36 +189,38 @@ public class Comandos {
   				 ps.setNome(nomePessoa.toLowerCase());
   				 ps.setTelefone(telefonePessoa);
   				 
-  				 lista.insert(new Nodo<String>(ps.getNome().toLowerCase()+" "+ps.getTelefone()));
+  				lista.insert(new Nodo<String>("Contato: "+ps.getNome().toUpperCase()+" "+"| Telefone: "+ps.getTelefone()));
   			
   				
   		 }
   			
-  		System.out.println("----------------");
+  		System.out.println("----------------------------------------------------------------");
 		
-  		System.out.println("Digite (W) para VOLTAR e (S) para AVANCAR ou (VOLTAR) para voltar ao menu inicial.\n");
+  		
 		do{
 		    
 		    try{
-			System.out.println("Digite o comando:");
-		    String s = sc.nextLine();
+		    	
+			String s = sc.nextLine();
 		
 		    s.toLowerCase();
 		    
-		    if(s.equals("s")){
+		    if(s.equals("a")){
 		   lista.upDown++;
 		    lista.printAgain();
 		 
-		}if(s.equals("w")){
+		}if(s.equals("v")){
 		    lista.upDown--;
 		    lista.printAgain();
 		 
 		}
-		if(s.equals("voltar")){
+		if(s.equals("s")){
 		    break;
 		 
 		}
-		   
+		
+		System.out.println("\n Menu:(a) proximo contato (v) contato anterior (s) para voltar ao menu inicial  \n"); 
+		
 		    }catch(Exception e){
 		    System.out.println("Entrada Inválida...");
 		}

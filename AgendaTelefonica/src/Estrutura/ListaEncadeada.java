@@ -72,52 +72,8 @@ public class ListaEncadeada<T extends Comparable<T>> {
 		tail.setNext(novo);
 		tail = novo;
 	}
-/*
-	public void waveNext(String s)
-	{
-	    Nodo<T> nodo = head;
-		    Nodo<T> nodo2 = head;
-	    String  tmp = null;    String  tmp2 = null; String  tmp3 = null;
-	    Nodo<?> prox = null;
-	    Nodo<T> ant = null;
-	    Nodo<?> anterior = null;
-	    anterior = nodo2;
-	  
-	    ant = nodo;
-	    if(s.equals("s")){
-	    if(nodo!=null){
-		
-		
-		
-		 ant = nodo;
-		
-		nodo= nodo.getNext();
-		head = nodo;
-		prox = nodo;
-		
-	    
-	    } else{
-		nodo = head;
-	
-	    }
-	    } 
-	    if(s.equals("d")){
-		//head = ant;
-		//nodo=head;
-		// = nodo;
-	    }
-	    tmp  = prox.getData().toString();
-	    tmp2  = ant.getData().toString();
-	    tmp3  = anterior.getData().toString();
-	    System.out.println("antt ant"+tmp3);
-	    System.out.println("antt "+tmp2);
-	    System.out.println("atual "+tmp);
-	    
-	
-	} 
 
 	
-*/
 	public void printAgain()
 	{
 		Nodo<?> nodo = head;
@@ -133,12 +89,7 @@ public class ListaEncadeada<T extends Comparable<T>> {
 			
 		 }while(i<upDown && nodo != null);
 			
-		//	out.println(temp2);
+		
 		 out.println(temp1);
 	}
-	
-	//public void action()
-//
-
-
 }

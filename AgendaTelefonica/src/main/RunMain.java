@@ -1,6 +1,6 @@
-/**Trabalho da agenda..
+/**Agenda Telefônica..
  * 
- * @author Dennis Kaffer
+ * @author Pedro Noschang
 
  * @version 1.0
 
@@ -23,17 +23,17 @@ public class RunMain {
 	    
 	    while(true){
 		  
-	    Comandos cmds = new Comandos();
+	    Comandos prompt = new Comandos();
 	    
-	    cmds.showMenu();
+	    prompt.showMenu();
 	    
-	    String Entrada;
+	    Integer Entrada;
 	    Comandos.sc = new Scanner(System.in);
 	    
-	    Entrada = Comandos.sc.nextLine();
+	    Entrada = Comandos.sc.nextInt();
 	    
 
-	    cmds.readAction(Entrada);
+	    prompt.readAction(Entrada);
 	    
 	}   
 		
