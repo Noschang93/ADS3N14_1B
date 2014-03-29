@@ -1,6 +1,7 @@
 package Estrutura;
 
-
+import java.util.ArrayList;
+import java.util.Scanner;
 
 	public class ListaOrdenada<T extends Comparable<T>> extends ListaEncadeada<T> {
 
@@ -49,18 +50,27 @@ package Estrutura;
 			insert(novo);
 		}
 
-
+			
+				
+		
 		public static void main(String[] args) {
-			ListaOrdenada<String> lista = new ListaOrdenada<String>();
-
-			lista.insert(new Nodo<String>("Rafael"));
-			lista.insert(new Nodo<String>("Dennis"), lista.getHead());
-			lista.append(new Nodo<String>("Mauro"));
-			lista.insert(new Nodo<String>("Carlos"));
+		ListaOrdenada obj1 = new ListaOrdenada();
 			
-			lista.print();
-			System.out.println("--------");
+			ListaOrdenada<Integer> lista = new ListaOrdenada<Integer>();
+		 	
+	 		Nodo<Integer> novo = new Nodo<Integer>(1);
+	 		lista.insert(novo);
+	 		
+	 		lista.insert(new Nodo<Integer>(2), novo);
+	 		
+	 		lista.append(new Nodo<Integer>(3));
+	 		
+	 		lista.insert(new Nodo<Integer>(4), novo);
+	 		
+	 		
+	 		
 			
+	 		
 		}
 
 	}

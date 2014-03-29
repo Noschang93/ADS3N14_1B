@@ -6,22 +6,30 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Reader;
 import java.io.Writer;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import Estrutura.ListaOrdenada;
 import Estrutura.Nodo;
 import Estrutura.Pessoa;
 
-public class Comandos {
 
+public class Comandos {
+	
     private BufferedReader br;
     public static Scanner sc;
+    private ListaOrdenada novaLista;
 
-
-    public void showMenu(){
-	System.out.println("\n Menu: \n 1- Adicionar Contato \n 2 - Mostrar Lista\n 3 - Pesquisar Letra\n 4 - Navegar\n 5- Sair\n");
-
-	
+    public void showMenu()
+    {
+	System.out.println("\n"
+			+ " Menu: \n "
+			+ "1- Adicionar Contato \n "
+			+ "2 - Mostrar Lista\n "
+			+ "3 - Pesquisar Letra\n "
+			+ "4 - Navegar\n "
+			+ "5 - Pesquisa binaria \n "
+			+ "6 - sair\n");
     }
     
     public void readAction(Integer cmd) throws IOException{
@@ -46,13 +54,106 @@ public class Comandos {
 	}
 	
 	if(cmd.equals(5)){
-	    System.out.println("você saiu do sistema");
-	    System.exit(0);
+		binarySearch();
+	   
+	}
+	
+	if(cmd.equals(6)){
+		 System.out.println("você saiu do sistema");
+		 System.exit(0);
 	}
 	
 	
-	
      }
+    
+
+    public void binarySearch() throws IOException{
+    	
+      Pessoa ps = new Pessoa();
+  	
+   	 novaLista = new ListaOrdenada<String>();
+  	
+  	 Reader fileReader = new FileReader("Lista_telefonica.txt");
+  	 br = new BufferedReader(fileReader);
+  	
+        
+    String line = null;
+
+  	
+  	 while ((line = br.readLine()) != null)
+  	 {
+  		
+  	     String[] breakLine = line.split(";");
+  	     
+  	    		
+  			 String nomePessoa = breakLine[0];//nome
+  			 String telefonePessoa = breakLine[1];//telefone
+  			 
+  			 ps.setNome(nomePessoa.toLowerCase());
+  			 ps.setTelefone(telefonePessoa);
+  			 
+  			 novaLista.insert(new Nodo<String>("Contato: "+ps.getNome().toUpperCase()+" "+"| Telefone: "+ps.getTelefone()));
+  		
+  			
+  	     }// fim do while
+  		Nodo<?> novo  = novaLista.getHead();
+  		
+  	 	ArrayList<String> myArray = new ArrayList();
+  	 
+  	 	  	 	
+  	 	while (novo != null)
+  	 	{
+  	 		
+  	 		String temp = novo.getData().toString();
+  	 		novo = novo.getNext();
+  	 		myArray.add(temp);
+  	 			 		
+  	 	}
+  	 	
+  	 	System.out.println("Digite o numero para a pesquisa binaria");
+  	 	
+  	 	Scanner leitor = new Scanner(System.in);
+  	 	int x = leitor.nextInt();
+  	 	
+  	 	int esquerda, direita, meio, count = 0;
+  	 	
+  	 	
+  	 	esquerda = 0 ; 	 	
+  	 	direita = myArray.size();
+  	 	meio  = (direita / 2); 
+  	 		  	
+  	 	
+  	 	
+  	 	while (esquerda <= direita)		
+  	 	{	
+  	 		if (meio == x)
+  	 		{
+  	 				System.out.println("Contato numero "+x+" da lista: "+ myArray.get(meio-1));
+  	 				System.out.println("numero de comparações : " +count);
+  	 				break;
+  	 		}
+  	 		if (x > meio)
+  	 		{
+  	 			esquerda = meio + 1;
+  	 			meio = (esquerda + direita) / 2;
+  	 			count++;
+  	 		}
+  	 		
+  	 		if (x < meio)
+  	 		{
+  	 			direita = meio - 1;
+  	 			meio = (esquerda + direita) / 2;
+  	 			count++;
+  	 		}
+  	 		
+  	 	}
+  	 	
+        
+      }// fim do metodo
+
+    
+    
+        
     
     public void add() throws IOException{
 	
@@ -149,9 +250,8 @@ public class Comandos {
  
  			 String nomePessoa = breakLine[0];//nome
  			 String telefonePessoa = breakLine[1];//telefone
- 			 nomePessoa.toLowerCase();
- 			
- 					 
+ 			 
+ 			 					 
  			 ps.setNome(nomePessoa.toLowerCase());
  			 ps.setTelefone(telefonePessoa);
  			 
@@ -162,7 +262,14 @@ public class Comandos {
  		System.out.println("----------------");
  		lista.printUniqueChar(c);
   }
-  
+
+  	
+  	
+  	
+  	
+  	
+  	
+  	
   	public void surfIntoList() throws IOException{
 
   	     Pessoa ps = new Pessoa();
@@ -184,7 +291,7 @@ public class Comandos {
   			
   				 String nomePessoa = breakLine[0];//nome
   				 String telefonePessoa = breakLine[1];//telefone
-  				nomePessoa.toLowerCase();
+  				 
   	 				 
   				 ps.setNome(nomePessoa.toLowerCase());
   				 ps.setTelefone(telefonePessoa);
@@ -203,13 +310,12 @@ public class Comandos {
 		    	
 			String s = sc.nextLine();
 		
-		    s.toLowerCase();
-		    
-		    if(s.equals("a")){
+		    		    
+		    if(s.toLowerCase().equals("a")){
 		   lista.upDown++;
 		    lista.printAgain();
 		 
-		}if(s.equals("v")){
+		}if(s.toLowerCase().equals("v")){
 		    lista.upDown--;
 		    lista.printAgain();
 		 
